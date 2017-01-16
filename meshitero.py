@@ -26,7 +26,7 @@ def getTweet():
     # Twitter API
     api = tweepy.API(auth)
 
-    count = 10
+    count = 5
     # Timelineの取得 (1)
     # 自分がフォロー関係のツイートを取得する
     #print u'[ Home Timeline : 最新 %d件 ]' % count
@@ -96,7 +96,7 @@ def tweet_image():
 	f = open('log.txt', 'r')
 	flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
 	for line in f.readlines():
-	    data.append(int(line.strip()))
+            data.append(int(line.strip()))
 	flock(f, fcntl.LOCK_UN)
 	f.close()
     else:
@@ -109,28 +109,26 @@ def tweet_image():
     flock(f, fcntl.LOCK_UN)
     f.close()
 
-            # 自分への未応答のメンションのそれぞれについて応答
-    mentions = api.mentions_timeline(count=10)
+    # 自分への未応答のメンションのそれぞれについて応答
+    mentions = api.mentions_timeline(count=5)
     for tweet in mentions:
 	if not tweet.id in data:
-	    try:
-		api.update_status(
-		    status='@%s' % (tweet.user.screen_name.encode('utf-8')) + text,
-		    in_reply_to_status_id=tweet.id
-		)
+            try:
+		api.update_with_media(filename=pic+'.jpg',status='@%s' % (tweet.user.screen_name.encode('utf-8')) + text,in_reply_to_status_id=tweet.id)
 		data.append(tweet.id)
-	    except tweepy.TweepError as e:
+                print text
+            except tweepy.TweepError as e:
 		print e
 	else:
-	    print 'INFO: already replied %d' % tweet.id
-    
+            print 'INFO: already replied %d' % tweet.id
+
     """#reply settings
     for status in api.home_timeline():
 	status_id=status.id
 	screen_name=status.author.screen_name.encode("UTF-8")
 	reply_text="@"+screen_name+" "+ text
         print reply_text
-        # Send Tweet                                                                                                                                                                
+        # Send Tweet
         try:
             api.update_with_media(filename=pic+'.jpg',status=reply_text,in_reply_to_status_id=status_id)
         except tweepy.TweepError as e:
