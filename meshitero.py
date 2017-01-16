@@ -122,18 +122,6 @@ def tweet_image():
 	else:
             print 'INFO: already replied %d' % tweet.id
 
-    """#reply settings
-    for status in api.home_timeline():
-	status_id=status.id
-	screen_name=status.author.screen_name.encode("UTF-8")
-	reply_text="@"+screen_name+" "+ text
-        print reply_text
-        # Send Tweet
-        try:
-            api.update_with_media(filename=pic+'.jpg',status=reply_text,in_reply_to_status_id=status_id)
-        except tweepy.TweepError as e:
-            print e
-            #print 'Error code {0}: {1}'.format(e[0][0]['code'], e[0][0]['message'])"""
     # 更新された status_id のリストを書き出し
     f = open('log.txt', 'w')
     flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
