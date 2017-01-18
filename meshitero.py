@@ -13,10 +13,10 @@ from fcntl import flock
 
 
 def getTweet():
-    consumer_key        = 'aH3wcFjp8IJ3FMjExrUXLl4nD'
-    consumer_secret     = '0TOsRtfaAJFWSmOyCFnkhfwq2aZEOmEraCEElUg4dr0Ii8jmej'
-    access_token        = '800556554420224000-ZbCac56flWdHcjTBTa9eXwHKQ6SKQ0Y'
-    access_token_secret = '6q0plxzru9Z00KebRQOCj0Hiwff92lDdsxZimz2hHFwDz'
+    consumer_key        = ''
+    consumer_secret     = ''
+    access_token        = ''
+    access_token_secret = ''
 
     # Twitter OAuth
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
